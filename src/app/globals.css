@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  /* Warm natural palette */
+  --color-cream: #fdfaf5;
+  --color-shell: #f8f2e9;
+  --color-sand: #efe3d4;
+  --color-beige: #e3d3c0;
+  --color-ink: #35302a;
+  --color-muted: #7c6d5e;
+  --color-terracotta: #b4634a;
+  --color-terracotta-dark: #95503c;
+  --color-gold: #c0985f;
+
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-beige);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 3px;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font-family: inherit;
+  }
+}
+
+@utility eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+}
+
+/* Thin decorative divider used between sections */
+@utility hairline {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-beige),
+    transparent
+  );
+  height: 1px;
+}
+
+@keyframes dc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.dc-rise {
+  animation: dc-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.dc-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.dc-reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .dc-rise,
+  .dc-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
